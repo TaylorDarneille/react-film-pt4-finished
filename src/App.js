@@ -15,6 +15,15 @@ class App extends Component {
   }
 
   handleDetailsClick = (film) => {
+    const url = `https://api.themoviedb.org/3/movie/${film.id}?api_key=${TMDB.api_key}&append_to_response=videos,images&language=en`
+    fetch(url)
+    .then(response=>response.json())
+    .then(json=>{
+      this.setState({current: json})
+    })
+    .catch(err=>{
+      console.log("Error fetching deatils!", err);
+    })
     console.log("Fetching details for", film.title);
   }
 
